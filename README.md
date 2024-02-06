@@ -44,6 +44,28 @@ and add `angular-dark-mode.js` file to `angular.json` scripts section:
 }
 ```
 
+or provide it inside the `app.module.ts` file 
+
+```typescript
+import { DarkModeService } from 'angular-dark-mode'
+
+export function initDarkMode(darkModeService: DarkModeService) {
+  return () => darkModeService
+}
+
+@NgModule({
+// ...
+providers: [
+    {
+      provide: APP_INITIALIZER, // If you wish to instantiate it before the App renders
+      useFactory: initDarkMode,
+      deps: [DarkModeService],
+      multi: true,
+    },
+]
+})
+```
+
 if you are using custom configuration see [angular-dark-mode.js](#angular-dark-mode.js)
 
 ## Usage
